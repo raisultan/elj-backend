@@ -6,6 +6,7 @@ from timetable import views
 
 router = DefaultRouter()
 router.register('lessons', views.LessonViewSet)
+router.register('days', views.DayViewSet)
 
 app_name = 'timetable'
 

@@ -5,6 +5,7 @@ from django.contrib.auth.models import (
     PermissionsMixin,
 )
 from django.conf import settings
+from django.utils.translation import gettext as _
 
 
 class UserManager(BaseUserManager):
@@ -66,6 +67,7 @@ class Lesson(models.Model):
     number = models.IntegerField()
     cabinet = models.CharField(max_length=255)
     time = models.CharField(max_length=255)
+    class_name = models.CharField(max_length=12)
     teacher = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
@@ -73,3 +75,24 @@ class Lesson(models.Model):
 
     def __str__(self):
         return self.subject_name
+
+
+class Day(models.Model):
+    """Day to be used in timetable"""
+    DAYS_OF_THE_WEEK = (
+        ('MON', _('Понедельник')),
+        ('TUE', _('Вторник')),
+        ('WED', _('Среда')),
+        ('THU', _('Четверг')),
+        ('FRI', _('Пятница')),
+        ('SAT', _('Суббота')),
+    )
+    day_of_week = models.CharField(max_length=3, choices=DAYS_OF_THE_WEEK)
+    lessons = models.ManyToManyField('Lesson')
+    teacher = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+    )
+
+    def __str__(self):
+        return self.day_of_week
