@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 
     'core',
     'user',
+    'timetable',
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True

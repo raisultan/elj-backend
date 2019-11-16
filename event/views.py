@@ -20,8 +20,8 @@ class EventViewSet(viewsets.GenericViewSet,
 
     def get_queryset(self):
         """Return events for the current authenticated user only"""
-        return self.queryset.filter(user=self.request.user).order_by('id')
+        return self.queryset.filter(teacher=self.request.user).order_by('id')
 
     def perform_create(self, serializer):
         """Create a new event"""
-        return serializer.save(user=self.request.user)
+        return serializer.save(teacher=self.request.user)

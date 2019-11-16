@@ -5,3 +5,4 @@ from core import models
 
 admin.site.register(models.User)
 admin.site.register(models.Event)
+admin.site.register(models.Lesson)
