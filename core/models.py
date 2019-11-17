@@ -96,3 +96,62 @@ class Day(models.Model):
 
     def __str__(self):
         return self.day_of_week
+
+
+class StudyYear(models.Model):
+    """Study year to be used in class and subject"""
+    year = models.PositiveIntegerField()
+
+    def __str__(self):
+        return str(self.year)
+
+
+class Subject(models.Model):
+    """Subject to be used for students"""
+    name = models.CharField(max_length=255)
+    study_year = models.ForeignKey('StudyYear', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.name} - {self.study_year}'
+
+
+class Mark(models.Model):
+    """Mark to be used in journal for students"""
+    MARK_VALUES = (
+        ('PRE', _('Присутствует')),
+        ('ABS', _('Отсутствует')),
+        ('TWO', _('2')),
+        ('THR', _('3')),
+        ('FOU', _('4')),
+        ('FIV', _('5')),
+    )
+    value = models.CharField(max_length=3, choices=MARK_VALUES, default='PRE')
+    date = models.DateField()
+    subject = models.ForeignKey('Subject', on_delete=models.CASCADE)
+    student = models.ForeignKey('Student', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.value} - {self.date} - {self.subject} - {self.student}'
+
+
+class StudentClass(models.Model):
+    """Class to be used for the students"""
+    name = models.CharField(max_length=12)
+    study_year = models.ForeignKey('StudyYear', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.name} - {self.study_year}'
+
+
+class Student(models.Model):
+    """One of the main roles in the app"""
+    name = models.CharField(max_length=255)
+    surname = models.CharField(max_length=255)
+    lastname = models.CharField(max_length=255)
+    birth_date = models.DateField()
+    address = models.CharField(max_length=255)
+    phone = models.CharField(max_length=32)
+    student_class = models.ForeignKey('StudentClass', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.surname} {self.name}'
