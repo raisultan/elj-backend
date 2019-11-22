@@ -41,10 +41,12 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
+    'drf_multiple_model',
 
     'core',
     'user',
     'timetable',
+    'journal',
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True

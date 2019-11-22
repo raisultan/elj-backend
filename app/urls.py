@@ -21,4 +21,5 @@ urlpatterns = [
     path('api/user/', include('user.urls')),
     path('api/event/', include('event.urls')),
     path('api/timetable/', include('timetable.urls')),
+    path('api/journal/', include('journal.urls')),
 ]

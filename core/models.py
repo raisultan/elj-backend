@@ -39,6 +39,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     address = models.CharField(max_length=255, blank=True)
     phone = models.CharField(max_length=255, blank=True)
     birth_date = models.DateField(null=True, blank=True)
+    subjects = models.ManyToManyField('Subject')
+    student_classes = models.ManyToManyField('StudentClass')
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 
@@ -128,7 +130,8 @@ class Mark(models.Model):
     value = models.CharField(max_length=3, choices=MARK_VALUES, default='PRE')
     date = models.DateField()
     subject = models.ForeignKey('Subject', on_delete=models.CASCADE)
-    student = models.ForeignKey('Student', on_delete=models.CASCADE)
+    student = models.ForeignKey('Student', on_delete=models.CASCADE,
+                                related_name='marks')
 
     def __str__(self):
         return f'{self.value} - {self.date} - {self.subject} - {self.student}'

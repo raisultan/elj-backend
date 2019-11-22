@@ -3,14 +3,22 @@ from django.utils.translation import ugettext_lazy as _
 
 from rest_framework import serializers
 
+from journal.serializers import (
+    SubjectSerializer,
+    StudentClassSerializer
+)
+
 
 class UserSerializer(serializers.ModelSerializer):
     """Serializer for the user object"""
+    subjects = SubjectSerializer(many=True, read_only=True)
+    student_classes = StudentClassSerializer(many=True, read_only=True)
 
     class Meta:
         model = get_user_model()
-        fields = ['email', 'password', 'name', 'surname',
-                  'lastname', 'address', 'phone', 'birth_date']
+        fields = ['email', 'password', 'name', 'surname', 'lastname',
+                  'address', 'phone', 'birth_date', 'subjects',
+                  'student_classes']
         extra_kwargs = {'password': {'write_only': True, 'min_length': 5}}
 
     def create(self, validated_data):
