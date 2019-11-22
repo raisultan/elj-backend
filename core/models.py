@@ -39,8 +39,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     address = models.CharField(max_length=255, blank=True)
     phone = models.CharField(max_length=255, blank=True)
     birth_date = models.DateField(null=True, blank=True)
-    subjects = models.ManyToManyField('Subject')
-    student_classes = models.ManyToManyField('StudentClass')
+    teaching_subjects = models.ManyToManyField('TeacherSubject')
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 
@@ -158,3 +157,12 @@ class Student(models.Model):
 
     def __str__(self):
         return f'{self.surname} {self.name}'
+
+
+class TeacherSubject(models.Model):
+    """Subject oriented for teacher"""
+    name = models.CharField(max_length=255)
+    student_classes = models.ManyToManyField('StudentClass')
+
+    def __str__(self):
+        return self.name

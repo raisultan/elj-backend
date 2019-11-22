@@ -5,6 +5,7 @@ from core.models import (
     Mark,
     StudentClass,
     Student,
+    TeacherSubject,
 )
 
 
@@ -62,4 +63,14 @@ class MarkSerializer(serializers.ModelSerializer):
         model = Mark
         fields = ('id', 'value', 'date', 'subject',
                   'student', 'subject_id', 'student_id')
+        read_only_fields = ('id',)
+
+
+class TeacherSubjectSerializer(serializers.ModelSerializer):
+    """Serializer for subject object"""
+    student_classes = StudentClassSerializer(read_only=True, many=True)
+
+    class Meta:
+        model = TeacherSubject
+        fields = ('id', 'name', 'student_classes')
         read_only_fields = ('id',)
