@@ -92,7 +92,7 @@ class JournalAPIView(viewsets.ModelViewSet):
         mark_querysets = []
 
         for student in students_queryset:
-            mark_querysets.append(student.marks.filter(subject__id=subject))
+            mark_querysets.append(student.marks.filter(subject__name=subject))
 
         queryset = list(chain(*mark_querysets))
 
