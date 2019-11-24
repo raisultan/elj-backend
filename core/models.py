@@ -166,3 +166,13 @@ class TeacherSubject(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class School(models.Model):
+    """School information"""
+    name = models.CharField(max_length=255)
+    address = models.CharField(max_length=255)
+    phone = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name

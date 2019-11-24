@@ -6,6 +6,7 @@ from core.models import (
     StudentClass,
     Student,
     TeacherSubject,
+    School,
 )
 
 
@@ -74,3 +75,12 @@ class TeacherSubjectSerializer(serializers.ModelSerializer):
         model = TeacherSubject
         fields = ('id', 'name', 'student_classes')
         read_only_fields = ('id',)
+
+
+class SchoolSerializer(serializers.ModelSerializer):
+    """Serializer for school object"""
+
+    class Meta:
+        model = School
+        fields = ('id', 'name', 'address', 'phone')
+        read_only_fields = ('id', )

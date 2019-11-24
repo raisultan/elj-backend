@@ -10,6 +10,7 @@ from core.models import (
     Mark,
     StudentClass,
     Student,
+    School,
 )
 from journal import serializers
 
@@ -97,3 +98,9 @@ class JournalAPIView(viewsets.ModelViewSet):
         queryset = list(chain(*mark_querysets))
 
         return queryset
+
+
+class SchoolViewSet(BaseJournalAttrViewSet):
+    """Manage school in the database"""
+    queryset = School.objects.all()
+    serializer_class = serializers.SchoolSerializer

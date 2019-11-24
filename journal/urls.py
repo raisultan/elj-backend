@@ -11,6 +11,7 @@ router.register('marks', views.MarkViewSet)
 router.register('student_classes', views.StudentClassViewSet)
 router.register('students', views.StudentViewSet)
 router.register('journals', views.JournalAPIView)
+router.register('school', views.SchoolViewSet)
 
 app_name = 'journal'
 
